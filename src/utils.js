@@ -1,10 +1,6 @@
-function is_server() {
-  return !(typeof window != "undefined" && window.document);
-}
-
 export function getInterfaceLanguage() {
   const defaultLang = "en-US";
-  if (is_server()) {
+  if (typeof navigator === "undefined") {
     return defaultLang;
   }
   if (!!navigator && !!navigator.language) {
