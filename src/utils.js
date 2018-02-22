@@ -1,5 +1,12 @@
+function is_server() {
+  return !(typeof window != "undefined" && window.document);
+}
+
 export function getInterfaceLanguage() {
-  const defaultLang = 'en-US';
+  const defaultLang = "en-US";
+  if (is_server()) {
+    return defaultLang;
+  }
   if (!!navigator && !!navigator.language) {
     return navigator.language;
   } else if (!!navigator && !!navigator.languages && !!navigator.languages[0]) {
@@ -14,11 +21,11 @@ export function getInterfaceLanguage() {
 
 export function validateTranslationKeys(translationKeys) {
   const reservedNames = [
-    '_interfaceLanguage',
-    '_language',
-    '_defaultLanguage',
-    '_defaultLanguageFirstLevelKeys',
-    '_props',
+    "_interfaceLanguage",
+    "_language",
+    "_defaultLanguage",
+    "_defaultLanguageFirstLevelKeys",
+    "_props"
   ];
   translationKeys.forEach(key => {
     if (reservedNames.indexOf(key) !== -1) {
